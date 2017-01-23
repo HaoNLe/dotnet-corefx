@@ -117,6 +117,17 @@ public class WellKnownSidTypeTests
     }
 
     [Theory]
+    [InlineData(WellKnownSidType.WinLocalLogonSid)]
+    [InlineData(WellKnownSidType.WinApplicationPackageAuthoritySid)]
+    public void CanCreateSecurityIdentifierFromWellKnownSidTypeWithNullDomainSid(WellKnownSidType sidType)
+    {
+        var nullDomainSid = new SecurityIdentifier(WellKnownSidType.NullSid, null);
+        var wellKnownSidInstance = new SecurityIdentifier(sidType, nullDomainSid);
+
+        Assert.True(wellKnownSidInstance.IsWellKnown(sidType));
+    }
+
+    [Theory]
     [InlineData((WellKnownSidType)(-1))]
     [InlineData((WellKnownSidType)((int)WellKnownSidType.WinCapabilityRemovableStorageSid + 1))]
     public void CreatingSecurityIdentifierOutsideWellKnownSidTypeDefinedRangeThrowsException(WellKnownSidType sidType)
