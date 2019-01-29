@@ -34,8 +34,8 @@ namespace System.IO.Pipelines.Tests
                out ReadOnlySequenceSegment<byte> end,
                out int endIndex);
 
-           var startSegment = (BufferSegment)start;
-           var endSegment = (BufferSegment)end;
+           var startSegment = (BufferSegment<byte>)start;
+           var endSegment = (BufferSegment<byte>)end;
            Assert.NotNull(startSegment.MemoryOwner);
            Assert.NotNull(endSegment.MemoryOwner);
 
